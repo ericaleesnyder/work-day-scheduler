@@ -1,16 +1,3 @@
-// SAVE BUTTON
-// saves entry to local storage
-// needs render function to display on the schedule after refresh
-// this stackoverflow link might be helpful:
-// https://stackoverflow.com/questions/42963091/how-to-save-the-value-of-textarea-to-localstorage-then-display-it-in-the-same-te
-
-// jQuery things I will need:
-// getElementById ---> creating variables based on id
-//      --- var name = $('#id-name')
-// set text content ---> setting text of currentDay to actually be the current time 
-//      --- variable.text('moment function for current time')
-
-
 // HEADER
 var currentDay = moment().format('LL');
 $('#currentDay').text(currentDay);
@@ -39,3 +26,19 @@ function compareTime (hour) {
     }
 };
 
+// RETREIVING FROM LOCAL STORAGE
+for (var hourIn = 9; hourIn < 18; hourIn++) {
+    var hourScheduled = localStorage.getItem('hour-' + hourIn);
+    
+    if (hourScheduled) {
+        $("#hour-" + hourIn).children("textarea").val(hourScheduled)
+    }
+}
+
+// SAVING TO LOCAL STORAGE 
+$(".saveBtn").on("click", function () {
+    var input = $(this).parent().children('textarea');
+    var task = input.val();
+    var id = $(this).parent().attr("id");
+    localStorage.setItem(id, task);
+})
