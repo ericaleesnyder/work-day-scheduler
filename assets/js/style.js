@@ -2,7 +2,6 @@
 var currentDay = moment().format('LL');
 $('#currentDay').text(currentDay);
 
-
 // GET CURRENT TIME
 var currentTime = moment().hour();
 
